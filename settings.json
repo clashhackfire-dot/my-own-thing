@@ -1,0 +1,13 @@
+{
+  "host": "H1ckF1re-I8Xl.aternos.me",
+  "port": 61353,
+  "username": "AAGOP",
+  "password": "admin",
+  "features": {
+    "logs": true,
+    "chat": true,
+    "players": true,
+    "health": true,
+    "autoreconnect": true
+  }
+}
