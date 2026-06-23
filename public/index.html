@@ -1,0 +1,22 @@
+
+<!doctype html><html><head><title>Dashboard Pro V2</title>
+<style>
+body{font-family:Arial;background:#121212;color:#fff;margin:20px}
+.card{background:#1e1e1e;padding:15px;border-radius:12px;margin:10px 0}
+button{padding:8px 12px} input{padding:8px}
+</style></head><body>
+<h1>🤖 Mineflayer Dashboard Pro V2</h1>
+<div class=card><div id=status>Loading...</div></div>
+<div class=card><h3>Chat</h3><input id=msg><button onclick=send()>Send</button></div>
+<div class=card><h3>Players</h3><ul id=players></ul></div>
+<div class=card><h3>Logs</h3><pre id=logs></pre></div>
+<script>
+async function load(){
+ let d=await fetch('/api/status').then(r=>r.json());
+ status.innerHTML='Online: '+d.online+' | Health: '+d.health+' | Food: '+d.food;
+ players.innerHTML=d.players.map(x=>'<li>'+x+'</li>').join('');
+ logs.textContent=d.logs.join('\n');
+}
+async function send(){await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg.value})});msg.value='';}
+setInterval(load,2000);load();
+</script></body></html>
